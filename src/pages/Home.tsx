@@ -2,47 +2,15 @@
 
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules'; // Importar Autoplay desde 'swiper/modules'
+import 'swiper/css';
+import 'swiper/css/autoplay';
 import Precios from './Precios'; // Importa el componente Precios
 import Equipo from './Equipo'; // Importa el componente Equipo
 import Acerca from './Acerca'; // Importa el componente Acerca
 
 const Home: React.FC = () => {
-  // Configuración del carrusel
-  const settings = {
-    dots: false, // Opcional: Puedes ocultar los puntos si lo prefieres
-    infinite: true,
-    speed: 2000, // Aumenta la duración de la transición para simular un movimiento más suave y continuo
-    slidesToShow: 5, // Número de logos visibles en pantallas grandes
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 0, // Configura el autoplaySpeed a 0 para intentar un desplazamiento continuo
-    cssEase: "linear", // Usa una transición lineal para un movimiento constante
-    pauseOnHover: false, // Evita que el carrusel se pause al pasar el cursor
-    responsive: [
-      {
-        breakpoint: 1280, // Pantallas grandes
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 960, // Medianas pantallas
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 600, // Pequeñas pantallas
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-    ],
-  };
-
   // Lista de tecnologías con sus URLs de imagen
   const tecnologias = [
     {
@@ -107,15 +75,43 @@ const Home: React.FC = () => {
         >
           Tecnologías que Utilizamos
         </Typography>
-        <Slider {...settings}>
-          {tecnologias.concat(tecnologias).map((tecnologia, index) => ( // Duplicar la lista para un bucle más fluido
-            <Box key={index} sx={{ padding: 2 }}>
+        <Swiper
+          modules={[Autoplay]} // Añadir el módulo Autoplay aquí
+          spaceBetween={30}
+          slidesPerView={5}
+          loop={true}
+          autoplay={{
+            delay: 0, // Sin retraso entre transiciones
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false,
+          }}
+          speed={5000} // Controla la velocidad del desplazamiento
+          freeMode={true}
+          allowTouchMove={false} // Deshabilita el movimiento táctil para evitar interrupciones
+          breakpoints={{
+            1280: {
+              slidesPerView: 5,
+            },
+            960: {
+              slidesPerView: 4,
+            },
+            600: {
+              slidesPerView: 3,
+            },
+            0: {
+              slidesPerView: 2,
+            },
+          }}
+          style={{ width: '100%' }} // Asegura que el Swiper ocupe el 100% del contenedor
+        >
+          {tecnologias.map((tecnologia, index) => (
+            <SwiperSlide key={index}>
               <Box
                 sx={{
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  height: '120px',
+                  height: '160px', // Aumentar la altura del contenedor
                   background: 'rgba(255, 255, 255, 0.1)', // Fondo semi-transparente
                   backdropFilter: 'blur(10px)',
                   borderRadius: '16px',
@@ -125,6 +121,7 @@ const Home: React.FC = () => {
                     transform: 'scale(1.05)',
                     boxShadow: '0 8px 12px rgba(0, 0, 0, 0.2)',
                   },
+                  padding: 2,
                 }}
               >
                 <img
@@ -132,13 +129,13 @@ const Home: React.FC = () => {
                   alt={tecnologia.name}
                   style={{
                     maxWidth: '80%',
-                    maxHeight: '80%',
+                    maxHeight: '90%', // Aumentar el maxHeight para ajustarse al nuevo contenedor
                   }}
                 />
               </Box>
-            </Box>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
       </Box>
 
       {/* Sección de Precios */}
