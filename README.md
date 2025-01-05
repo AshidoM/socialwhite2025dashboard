@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -19,3 +20,6 @@ You can deploy your new Vite project with a single command from your terminal us
 ```shell
 $ vercel
 ```
+=======
+# socialwhite2025dashboard
+>>>>>>> 6204d5a6d14a787a44c6a333e39d8e364e409a22
